@@ -1,12 +1,11 @@
 .navbar {
-	display: flex;
+	display: grid;
+	grid-template-columns: 3fr 1fr;
 	justify-content: space-between;
 	padding: 10px;
-	margin: 0;
 }
 .nav-li {
 	display: flex;
-	margin: 0;
+	justify-content: space-around;
 	margin-left: 10px;
-	list-style: none;
 }
