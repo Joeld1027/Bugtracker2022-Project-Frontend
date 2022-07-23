@@ -1,9 +1,5 @@
 import { useState } from "react";
 
-import {
-	createAuthUserWithEmailAndPassword,
-	createUserDocumentFromAuth,
-} from "../../utils/firebase/firebase.utils";
 import Button from "../button/button.component";
 import FormInput from "../form-input/form-input.component";
 import { SignUpContainer } from "./sign-up-form.styles.jsx";
@@ -18,33 +14,33 @@ const testFields = ["displayName", "email", "password", "confirmPassword"];
 
 const SignUpForm = () => {
 	const [formFields, setFormFields] = useState(defaultFormFields);
-	const { displayName, email, password, confirmPassword } = formFields;
+	// const { displayName, email, password, confirmPassword } = formFields;
 
-	const resetFormFields = () => {
-		setFormFields(defaultFormFields);
-	};
+	// const resetFormFields = () => {
+	// 	setFormFields(defaultFormFields);
+	// };
 
-	const handleSubmit = async (event) => {
-		event.preventDefault();
-		if (password !== confirmPassword) {
-			alert("passwords dont match");
-			return;
-		}
-		try {
-			const { user } = await createAuthUserWithEmailAndPassword(
-				email,
-				password
-			);
+	// const handleSubmit = async (event) => {
+	// 	event.preventDefault();
+	// 	if (password !== confirmPassword) {
+	// 		alert("passwords dont match");
+	// 		return;
+	// 	}
+	// 	try {
+	// 		const { user } = await createAuthUserWithEmailAndPassword(
+	// 			email,
+	// 			password
+	// 		);
 
-			await createUserDocumentFromAuth(user, { displayName });
-			resetFormFields();
-		} catch (err) {
-			if (err.code === "auth/email-already-in-use") {
-				alert("Cannot create user. Email already in use.");
-			}
-			console.log(err, "Something went wrong while creating user");
-		}
-	};
+	// 		await createUserDocumentFromAuth(user, { displayName });
+	// 		resetFormFields();
+	// 	} catch (err) {
+	// 		if (err.code === "auth/email-already-in-use") {
+	// 			alert("Cannot create user. Email already in use.");
+	// 		}
+	// 		console.log(err, "Something went wrong while creating user");
+	// 	}
+	// };
 
 	const handleChange = (event) => {
 		const { name, value } = event.target;
@@ -55,7 +51,7 @@ const SignUpForm = () => {
 		<SignUpContainer>
 			<h2>Don't have an account?</h2>
 			<span>Sign up with your email and password</span>
-			<form onSubmit={handleSubmit}>
+			<form>
 				{testFields.map((field) => {
 					return (
 						<FormInput

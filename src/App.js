@@ -1,8 +1,8 @@
 import { Routes, Route } from "react-router-dom";
 import Navigation from "./routes/navigation/navigation.component.jsx";
 import HomePage from "./routes/homepage/homepage.component.jsx";
-import "./App.css";
 import Authentication from "./routes/authentication/authentication.component.jsx";
+import Dashboard from "./routes/dashboard/dashboard.component.jsx";
 
 function App() {
 	return (
@@ -10,6 +10,7 @@ function App() {
 			<Route path="/" element={<Navigation />}>
 				<Route index element={<HomePage />} />
 				<Route path="auth" element={<Authentication />} />
+				<Route path="dashboard" element={<Dashboard />} />
 			</Route>
 		</Routes>
 	);
