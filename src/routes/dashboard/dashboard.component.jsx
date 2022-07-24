@@ -1,7 +1,11 @@
+import Aside from "../../components/aside/aside.component";
+import MainDashboard from "../../components/main-dashboard/main-dashboard.component";
+
 const Dashboard = () => {
 	return (
-		<div>
-			<h1>this is the Dashboard</h1>
+		<div className="main-container">
+			<Aside />
+			<MainDashboard />
 		</div>
 	);
 };
