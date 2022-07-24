@@ -18,23 +18,27 @@ const Aside = () => {
 			</div>
 
 			<div className="sidebar">
-				<Link className="active" to="/">
+				<Link className="active" to="/dashboard">
 					<span className="material-symbols-sharp"> dashboard </span>
 					<h3>Dashboard</h3>
 				</Link>
-				<Link to="/">
+				<Link to="/dashboard/tickets">
 					<span className="material-symbols-sharp"> receipt_long </span>
-					<h3>Ticket</h3>
+					<h3>Tickets</h3>
 				</Link>
-				<Link to="/">
+				<Link to="/dashboard/projects">
 					<span className="material-symbols-sharp"> inventory </span>
 					<h3>Projects</h3>
 				</Link>
-				<Link to="/">
+				<Link to="/dashboard/analytics">
 					<span className="material-symbols-sharp"> query_stats </span>
 					<h3>Analytics</h3>
 				</Link>
-				<Link to="/">
+				<Link to="/dashboard/users">
+					<span class="material-symbols-sharp"> groups </span>
+					<h3>Users</h3>
+				</Link>
+				<Link to="/dashboard/profile">
 					<span className="material-symbols-sharp"> person </span>
 					<h3>Profile</h3>
 				</Link>
