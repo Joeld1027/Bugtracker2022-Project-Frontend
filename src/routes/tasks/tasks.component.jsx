@@ -1,12 +1,12 @@
 import DataTable from "../../components/table/data-table.component";
 
-const Projects = () => {
+const Tasks = () => {
 	return (
 		<main>
-			<h1>Projects</h1>
+			<h1>Tickets</h1>
 			<DataTable />
 		</main>
 	);
 };
 
-export default Projects;
+export default Tasks;

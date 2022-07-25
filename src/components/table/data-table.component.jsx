@@ -3,7 +3,7 @@ import "./data-table.styles.css";
 
 const DataTable = () => {
 	return (
-		<div class="recent-orders">
+		<div className="recent-orders">
 			<h2>Recent Tickets</h2>
 			<table>
 				<thead>
@@ -19,15 +19,15 @@ const DataTable = () => {
 						<td>Foldable Mini Drone</td>
 						<td>85631</td>
 						<td>Due</td>
-						<td class="warning">pending</td>
-						<td class="primary">Details</td>
+						<td className="warning">pending</td>
+						<td className="primary">Details</td>
 					</tr>
 					<tr>
 						<td>Foldable Mini Drone</td>
 						<td>85631</td>
 						<td>Due</td>
-						<td class="warning">pending</td>
-						<td class="primary">Details</td>
+						<td className="warning">pending</td>
+						<td className="primary">Details</td>
 					</tr>
 				</tbody>
 			</table>

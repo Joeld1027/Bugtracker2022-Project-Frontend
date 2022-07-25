@@ -35,7 +35,7 @@ const Aside = () => {
 					<h3>Analytics</h3>
 				</Link>
 				<Link to="/dashboard/users">
-					<span class="material-symbols-sharp"> groups </span>
+					<span className="material-symbols-sharp"> groups </span>
 					<h3>Users</h3>
 				</Link>
 				<Link to="/dashboard/profile">
