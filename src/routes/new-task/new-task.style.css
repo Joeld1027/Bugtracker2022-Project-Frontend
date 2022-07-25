@@ -1,0 +1,11 @@
+main .task-form-container {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	border: 1px solid grey;
+	border-radius: 5px;
+}
+
+main .task-form-container form {
+	width: 560px;
+}

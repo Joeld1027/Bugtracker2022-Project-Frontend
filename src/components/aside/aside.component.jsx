@@ -22,9 +22,9 @@ const Aside = () => {
 					<span className="material-symbols-sharp"> dashboard </span>
 					<h3>Dashboard</h3>
 				</Link>
-				<Link to="/dashboard/tickets">
+				<Link to="/dashboard/tasks">
 					<span className="material-symbols-sharp"> receipt_long </span>
-					<h3>Tickets</h3>
+					<h3>Tasks</h3>
 				</Link>
 				<Link to="/dashboard/projects">
 					<span className="material-symbols-sharp"> inventory </span>

@@ -18,8 +18,8 @@ function App() {
 			</Route>
 			<Route path="dashboard" element={<Dashboard />}>
 				<Route index element={<MainDashboard />} />
-				<Route path="tickets" element={<Tasks />} />
-				<Route path="newtask" element={<NewTask />} />
+				<Route path="tasks" element={<Tasks />} />
+				<Route path="tasks/new" element={<NewTask />} />
 				<Route path="projects" element={<Projects />} />
 				<Route path="users" element={<Users />} />
 			</Route>

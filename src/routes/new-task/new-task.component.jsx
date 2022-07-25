@@ -1,5 +1,6 @@
 import { useState } from "react";
 import FormInput from "../../components/form-input/form-input.component";
+import "./new-task.style.css";
 
 const defaultFormFields = {
 	name: "",
@@ -18,32 +19,37 @@ const NewTask = () => {
 
 	return (
 		<main>
-			<form>
-				<FormInput
-					label="Name"
-					type="text"
-					name="name"
-					required
-					value={name}
-					onChange={handleChange}
-				/>
-				<FormInput
-					label="Description"
-					type="text"
-					name="description"
-					required
-					value={description}
-					onChange={handleChange}
-				/>
-				<FormInput
-					label="Priority"
-					type="text"
-					name="priority"
-					required
-					value={priority}
-					onChange={handleChange}
-				/>
-			</form>
+			<div className="task-form-container">
+				<form>
+					<FormInput
+						label="Name"
+						type="text"
+						name="name"
+						required
+						value={name}
+						onChange={handleChange}
+					/>
+					<label>DESCRIPTION :</label>
+					<textarea
+						rows={10}
+						cols={50}
+						name="description"
+						required
+						value={description}
+						onChange={handleChange}
+					/>
+
+					<FormInput
+						label="Priority"
+						type="text"
+						name="priority"
+						required
+						value={priority}
+						onChange={handleChange}
+					/>
+					<input type="submit" value="Submit" />
+				</form>
+			</div>
 		</main>
 	);
 };

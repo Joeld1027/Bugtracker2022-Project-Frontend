@@ -1,0 +1,16 @@
+.tasks-header-container {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 3.5rem;
+}
+
+.tasks-header-container a {
+	display: flex;
+	margin-right: 20px;
+	font-size: 1rem;
+}
+
+.tasks-header-container a span {
+	font-size: 2.3rem;
+	margin-right: 5px;
+}
