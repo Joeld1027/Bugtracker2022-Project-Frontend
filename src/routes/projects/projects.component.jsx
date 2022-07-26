@@ -6,7 +6,7 @@ const Projects = () => {
 		<main>
 			<div className="tasks-header-container">
 				<h1>Projects</h1>
-				<Link className="success" to="new">
+				<Link className="primary" to="new">
 					<span className="material-symbols-sharp">post_add</span>
 					<h2>Add New Project</h2>
 				</Link>

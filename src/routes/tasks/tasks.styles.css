@@ -8,6 +8,9 @@
 	display: flex;
 	margin-right: 20px;
 	font-size: 1rem;
+	border: solid 1px;
+	border-radius: 12px;
+	padding: 10px;
 }
 
 .tasks-header-container a span {

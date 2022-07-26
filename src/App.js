@@ -8,6 +8,7 @@ import Tasks from "./routes/tasks/tasks.component.jsx";
 import Projects from "./routes/projects/projects.component.jsx";
 import Users from "./routes/users/users.component.jsx";
 import NewTask from "./routes/new-task/new-task.component.jsx";
+import NewProject from "./routes/new-project/new-project.component.jsx";
 
 function App() {
 	return (
@@ -21,6 +22,7 @@ function App() {
 				<Route path="tasks" element={<Tasks />} />
 				<Route path="tasks/new" element={<NewTask />} />
 				<Route path="projects" element={<Projects />} />
+				<Route path="projects/new" element={<NewProject />} />
 				<Route path="users" element={<Users />} />
 			</Route>
 		</Routes>

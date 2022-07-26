@@ -7,7 +7,7 @@ const Tasks = () => {
 		<main>
 			<div className="tasks-header-container">
 				<h1>Tasks</h1>
-				<Link className="success" to="new">
+				<Link className="primary" to="new">
 					<span className="material-symbols-sharp">add_task</span>
 					<h2>Add New Task</h2>
 				</Link>
