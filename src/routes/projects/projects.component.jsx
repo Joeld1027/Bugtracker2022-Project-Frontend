@@ -7,8 +7,8 @@ const Projects = () => {
 			<div className="tasks-header-container">
 				<h1>Projects</h1>
 				<Link className="primary" to="new">
-					<span className="material-symbols-sharp">post_add</span>
-					<h2>Add New Project</h2>
+					<span className="material-symbols-sharp">add</span>
+					<h3>Add New Project</h3>
 				</Link>
 			</div>
 			<DataTable />

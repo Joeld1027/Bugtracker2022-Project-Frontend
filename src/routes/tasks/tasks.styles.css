@@ -7,13 +7,13 @@
 .tasks-header-container a {
 	display: flex;
 	margin-right: 20px;
-	font-size: 1rem;
-	border: solid 1px;
-	border-radius: 12px;
-	padding: 10px;
+	border: 2px dashed;
+	border-radius: 1.7rem;
+	padding: 0.7rem;
+	align-items: center;
 }
 
 .tasks-header-container a span {
-	font-size: 2.3rem;
-	margin-right: 5px;
+	font-size: 2.4rem;
+	margin-right: 1rem;
 }
