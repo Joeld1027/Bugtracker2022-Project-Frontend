@@ -166,7 +166,7 @@ b {
 	}
 
 	main .recent-orders table {
-		width: 83vw;
+		width: 83vw !important;
 	}
 
 	main table thead tr th:last-child,
@@ -237,7 +237,7 @@ b {
 		width: 100%;
 	}
 	main .recent-orders table {
-		width: 100%;
+		width: 100% !important;
 		margin: 0;
 	}
 	.right {
