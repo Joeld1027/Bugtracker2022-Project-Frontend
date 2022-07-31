@@ -1,8 +1,11 @@
 import { useState } from "react";
-
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import Button from "../button/button.component";
+import { LoadingButtonContainer } from "../button/button.styles";
 import FormInput from "../form-input/form-input.component";
 import { SignInContainer, ButtonsContainer } from "./sign-in-form.styles.jsx";
+import { setCurrentUser } from "../../store/user/user.action";
 
 const defaultFormFields = {
 	email: "",
@@ -12,36 +15,52 @@ const testFields = ["email", "password"];
 
 const SignInForm = () => {
 	const [formFields, setFormFields] = useState(defaultFormFields);
-	// const { email, password } = formFields;
+	const [error, setError] = useState("");
+	const [isSubmitting, setIsSubmitting] = useState(false);
+	const { email, password } = formFields;
 
-	// const resetFormFields = () => {
-	// 	setFormFields(defaultFormFields);
-	// };
+	const navigate = useNavigate();
+	const dispatch = useDispatch();
 
-	// const signInWithGoogle = async () => {
-	// 	await signInWithGooglePopup();
-	// };
+	const resetFormFields = () => {
+		setFormFields(defaultFormFields);
+	};
 
-	// const handleSubmit = async (event) => {
-	// 	event.preventDefault();
+	const handleSubmit = async (event) => {
+		event.preventDefault();
+		setIsSubmitting(true);
+		setError("");
+		const genericErrorMessage = "Something went wrong! Please try again later.";
 
-	// 	try {
-	// 		await signInAuthUserWithEmailAndPassword(email, password);
-
-	// 		resetFormFields();
-	// 	} catch (err) {
-	// 		switch (err.code) {
-	// 			case "auth/wrong-password":
-	// 				alert("Email or Password is incorrect");
-	// 				break;
-	// 			case "auth/user-not-found":
-	// 				alert("This email does not exist");
-	// 				break;
-	// 			default:
-	// 				console.log(err);
-	// 		}
-	// 	}
-	// };
+		fetch("http://localhost:8082/auth/login", {
+			method: "POST",
+			credentials: "include",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({ username: email, password }),
+		})
+			.then(async (response) => {
+				setIsSubmitting(false);
+				if (!response.ok) {
+					if (response.status === 400) {
+						setError("Please fill all the fields correctly!");
+					} else if (response.status === 401) {
+						setError("Invalid email and password combination.");
+					} else {
+						setError(genericErrorMessage);
+					}
+				} else {
+					const data = await response.json();
+					console.log(data);
+					resetFormFields();
+					dispatch(setCurrentUser(data.user));
+					navigate("../dashboard", { replace: true });
+				}
+			})
+			.catch((error) => {
+				setIsSubmitting(false);
+				setError(genericErrorMessage);
+			});
+	};
 
 	const handleChange = (event) => {
 		const { name, value } = event.target;
@@ -50,9 +69,10 @@ const SignInForm = () => {
 
 	return (
 		<SignInContainer>
+			{error && <div>{error}</div>}
 			<h2>Already have an account?</h2>
 			<span>Sign in with your email and password</span>
-			<form>
+			<form onSubmit={handleSubmit}>
 				{testFields.map((field) => {
 					return (
 						<FormInput
@@ -67,7 +87,13 @@ const SignInForm = () => {
 					);
 				})}
 				<ButtonsContainer>
-					<Button type="submit">Sign in</Button>
+					{isSubmitting ? (
+						<LoadingButtonContainer>
+							<Button buttonType="loading" type="submit"></Button>
+						</LoadingButtonContainer>
+					) : (
+						<Button type="submit">Sign In</Button>
+					)}
 				</ButtonsContainer>
 			</form>
 		</SignInContainer>

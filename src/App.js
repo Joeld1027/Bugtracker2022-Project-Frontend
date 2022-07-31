@@ -9,6 +9,7 @@ import Projects from "./routes/projects/projects.component.jsx";
 import Users from "./routes/users/users.component.jsx";
 import NewTask from "./routes/new-task/new-task.component.jsx";
 import NewProject from "./routes/new-project/new-project.component.jsx";
+import RequireAuth from "./components/userAuth/userAuth.component.jsx";
 
 function App() {
 	return (
@@ -17,7 +18,15 @@ function App() {
 				<Route index element={<HomePage />} />
 				<Route path="auth" element={<Authentication />} />
 			</Route>
-			<Route path="dashboard" element={<Dashboard />}>
+
+			<Route
+				path="dashboard"
+				element={
+					<RequireAuth>
+						<Dashboard />
+					</RequireAuth>
+				}
+			>
 				<Route index element={<MainDashboard />} />
 				<Route path="tasks" element={<Tasks />} />
 				<Route path="tasks/new" element={<NewTask />} />

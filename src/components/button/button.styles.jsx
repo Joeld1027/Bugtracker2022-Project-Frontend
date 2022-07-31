@@ -46,3 +46,41 @@ export const InvertedButton = styled(BaseButton)`
 		border: none;
 	}
 `;
+
+export const LoadingButton = styled.button`
+	content: "";
+	position: absolute;
+	width: 26px;
+	height: 26px;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: auto;
+	border: 4px solid transparent;
+	background: black;
+	border-top-color: white;
+	border-radius: 50%;
+	animation: button-loading-spinner 1s ease infinite;
+
+	@keyframes button-loading-spinner {
+		from {
+			transform: rotate(0turn);
+		}
+		to {
+			transform: rotate(1turn);
+		}
+	}
+`;
+
+export const LoadingButtonContainer = styled.div`
+	min-width: 165px;
+	height: 50px;
+	position: relative;
+	padding: 8px 16px;
+	background: black;
+	border: none;
+	outline: none;
+	border-radius: 2px;
+	cursor: pointer;
+`;
