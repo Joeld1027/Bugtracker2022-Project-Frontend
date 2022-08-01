@@ -50,7 +50,6 @@ const SignInForm = () => {
 					}
 				} else {
 					const data = await response.json();
-					console.log(data);
 					resetFormFields();
 					dispatch(setCurrentUser(data.user));
 					navigate("../dashboard", { replace: true });
