@@ -72,7 +72,7 @@ const SignUpForm = () => {
 					const data = await response.json();
 					console.log(data);
 					resetFormFields();
-					dispatch(setCurrentUser(data.user));
+					dispatch(setCurrentUser(data));
 					navigate("../dashboard", { replace: true });
 				}
 			})
@@ -109,7 +109,7 @@ const SignUpForm = () => {
 				<ButtonsContainer>
 					{isSubmitting ? (
 						<LoadingButtonContainer>
-							<Button buttonType="loading" type="submit"></Button>
+							<Button buttonType="loading"></Button>
 						</LoadingButtonContainer>
 					) : (
 						<Button type="submit">Sign up</Button>

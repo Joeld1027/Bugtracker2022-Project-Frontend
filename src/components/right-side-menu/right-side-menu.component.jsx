@@ -1,6 +1,10 @@
 import "./right-side-menu.styles.css";
+import { selectCurrentUser } from "../../store/user/user.selector";
+import { useSelector } from "react-redux";
 
 const RightSideMenu = () => {
+	const user = useSelector(selectCurrentUser);
+
 	return (
 		<div className="right">
 			<div className="top">
@@ -14,9 +18,9 @@ const RightSideMenu = () => {
 				<div className="profile">
 					<div className="info">
 						<p>
-							Hey, <b>Daniel</b>
+							Hey, <b>{user.name}</b>
 						</p>
-						<small className="text-muted"> Admin </small>
+						<small className="text-muted"> {user.role} </small>
 					</div>
 					<div className="profile-photo">
 						<img

@@ -1,9 +1,8 @@
-export const USER_ACTION_TYPES = {
-	SET_CURRENT_USER: "SET_CURRENT_USER",
-};
+import { USER_ACTION_TYPES } from "./user.types";
 
 const INITIAL_STATE = {
 	currentUser: null,
+	token: "",
 };
 
 export const userReducer = (state = INITIAL_STATE, action) => {
@@ -13,7 +12,13 @@ export const userReducer = (state = INITIAL_STATE, action) => {
 		case USER_ACTION_TYPES.SET_CURRENT_USER:
 			return {
 				...state,
-				currentUser: payload,
+				currentUser: payload.user,
+				token: payload.token,
+			};
+		case USER_ACTION_TYPES.SET_USER_TOKEN:
+			return {
+				...state,
+				token: payload,
 			};
 		default:
 			return state;
