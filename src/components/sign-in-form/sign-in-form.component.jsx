@@ -6,6 +6,7 @@ import { LoadingButtonContainer } from "../button/button.styles";
 import FormInput from "../form-input/form-input.component";
 import { SignInContainer, ButtonsContainer } from "./sign-in-form.styles.jsx";
 import { setCurrentUser } from "../../store/user/user.action";
+import { setTokenHeader } from "../../service/apiCall";
 
 const defaultFormFields = {
 	email: "",
@@ -32,10 +33,14 @@ const SignInForm = () => {
 		setError("");
 		const genericErrorMessage = "Something went wrong! Please try again later.";
 
-		fetch("http://localhost:8082/auth/login", {
+		fetch("http://localhost:8081/auth/login", {
 			method: "POST",
+			withCredentials: true,
 			credentials: "include",
-			headers: { "Content-Type": "application/json" },
+			headers: {
+				Accept: "applicaiton/json",
+				"Content-Type": "application/json",
+			},
 			body: JSON.stringify({ username: email, password }),
 		})
 			.then(async (response) => {
@@ -52,6 +57,8 @@ const SignInForm = () => {
 					const data = await response.json();
 					resetFormFields();
 					console.log(data);
+					localStorage.setItem("jwToken", data.token);
+					setTokenHeader(data.token);
 					dispatch(setCurrentUser(data));
 					navigate("../dashboard", { replace: true });
 				}

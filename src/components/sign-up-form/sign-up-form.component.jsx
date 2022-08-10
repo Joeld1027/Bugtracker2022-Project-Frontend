@@ -46,7 +46,7 @@ const SignUpForm = () => {
 			return;
 		}
 
-		fetch("http://localhost:8082/auth/signup", {
+		fetch("http://localhost:8081/auth/signup", {
 			method: "POST",
 			credentials: "include",
 			headers: {
