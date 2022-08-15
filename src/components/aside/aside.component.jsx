@@ -1,8 +1,19 @@
 import "./aside.styles.css";
 import { Link } from "react-router-dom";
 import Logo from "../../assets/BTK2.png";
+import { setTokenHeader, apiCall } from "../../service/apiCall";
 
 const Aside = () => {
+	const handleLogout = () => {
+		setTokenHeader(localStorage.jwToken);
+		apiCall("post", "http://localhost:8081/auth/logout")
+			.then((response) => {
+				localStorage.clear();
+				console.log(response);
+			})
+			.catch((err) => console.log(err));
+	};
+
 	return (
 		<aside>
 			<div className="top">
@@ -42,7 +53,7 @@ const Aside = () => {
 					<span className="material-symbols-sharp"> person </span>
 					<h3>Profile</h3>
 				</Link>
-				<Link to="/">
+				<Link to="/" onClick={handleLogout}>
 					<span className="material-symbols-sharp"> logout </span>
 					<h3>Logout</h3>
 				</Link>

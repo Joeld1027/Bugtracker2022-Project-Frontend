@@ -11,7 +11,7 @@ const Projects = () => {
 					<h3>Add New Project</h3>
 				</Link>
 			</div>
-			<DataTable />
+			<DataTable url="projects" type="Projects" />
 		</main>
 	);
 };

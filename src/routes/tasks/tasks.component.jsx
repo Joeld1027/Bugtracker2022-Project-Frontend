@@ -12,7 +12,7 @@ const Tasks = () => {
 					<h3>Add New Task</h3>
 				</Link>
 			</div>
-			<DataTable />
+			<DataTable url="tasks" type="Tasks" />
 		</main>
 	);
 };
