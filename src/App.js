@@ -15,6 +15,8 @@ import RequireAuth from "./components/userAuth/userAuth.component.jsx";
 import { setCurrentUser } from "./store/user/user.action.js";
 import { setTokenHeader, apiCall } from "./service/apiCall";
 import { useEffect } from "react";
+import TaskDetailsPage from "./routes/tasks/task-details.component.jsx";
+import ProjectDetailsPage from "./routes/projects/project-details.component.jsx";
 
 function App() {
 	const navigate = useNavigate();
@@ -59,8 +61,10 @@ function App() {
 			>
 				<Route index element={<MainDashboard />} />
 				<Route path="tasks" element={<Tasks />} />
+				<Route path="tasks/:taskId" element={<TaskDetailsPage />} />
 				<Route path="tasks/new" element={<NewTask />} />
 				<Route path="projects" element={<Projects />} />
+				<Route path="projects/:projectId" element={<ProjectDetailsPage />} />
 				<Route path="projects/new" element={<NewProject />} />
 				<Route path="users" element={<Users />} />
 			</Route>

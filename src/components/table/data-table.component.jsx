@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import "./data-table.styles.css";
+import { Link } from "react-router-dom";
 import { apiCall } from "../../service/apiCall";
+import "./data-table.styles.css";
 
 const DataTable = ({ type = "Data", handleCheckbox, url }) => {
 	const [fetchedData, setFetchedData] = useState([]);
@@ -54,7 +55,9 @@ const DataTable = ({ type = "Data", handleCheckbox, url }) => {
 											/>
 										</th>
 									)}
-									<td className="primary">Details</td>
+									<td className="primary">
+										<Link to={`./${data._id}`}>Details</Link>
+									</td>
 								</tr>
 							);
 						})

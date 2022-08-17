@@ -56,7 +56,6 @@ const SignInForm = () => {
 				} else {
 					const data = await response.json();
 					resetFormFields();
-					console.log(data);
 					localStorage.setItem("jwToken", data.token);
 					setTokenHeader(data.token);
 					dispatch(setCurrentUser(data));
