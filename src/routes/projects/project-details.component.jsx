@@ -23,7 +23,7 @@ const ProjectDetailsPage = () => {
 					<h1>{project.name || "No name"}</h1>
 					<p>{project.description}</p>
 					<p>{project.priority}</p>
-					<p>{project.deadline.split("T")[0]}</p>
+					<p>{project.deadline && project.deadline.split("T")[0]}</p>
 					<p>{project.completed ? "Project Done" : "Project in progress"}</p>
 				</div>
 			</div>

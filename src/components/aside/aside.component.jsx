@@ -2,20 +2,35 @@ import "./aside.styles.css";
 import { Link } from "react-router-dom";
 import Logo from "../../assets/BTK2.png";
 import { setTokenHeader, apiCall } from "../../service/apiCall";
+import { useDispatch, useSelector } from "react-redux";
+import { selectActive } from "../../store/user/user.selector";
+import { useEffect, useState } from "react";
+import { setActiveMenu } from "../../store/user/user.action";
 
 const Aside = () => {
+	const dispatch = useDispatch();
+	const active = useSelector(selectActive);
+	const [isActive, setIsActive] = useState(active);
+
+	useEffect(() => {
+		setIsActive(active);
+	}, [active]);
+
+	const handleMenuClose = () => {
+		dispatch(setActiveMenu(false));
+	};
+
 	const handleLogout = () => {
 		setTokenHeader(localStorage.jwToken);
 		apiCall("post", "http://localhost:8081/auth/logout")
 			.then((response) => {
 				localStorage.clear();
-				console.log(response);
 			})
 			.catch((err) => console.log(err));
 	};
 
 	return (
-		<aside>
+		<aside style={{ display: isActive === true ? "block" : "" }}>
 			<div className="top">
 				<div className="logo">
 					<img src={Logo} alt="logo" />
@@ -23,7 +38,7 @@ const Aside = () => {
 						BT<span className="danger">K</span>
 					</h2>
 				</div>
-				<div className="close" id="close-btn">
+				<div className="close" id="close-btn" onClick={handleMenuClose}>
 					<span className="material-symbols-sharp"> close </span>
 				</div>
 			</div>

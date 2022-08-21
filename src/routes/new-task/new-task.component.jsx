@@ -1,19 +1,33 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { PublicFormContainer } from "../../public-components/public.styled.components";
 import { apiCall } from "../../service/apiCall";
 
 const defaultFormFields = {
-	taskName: "",
+	name: "",
 	description: "",
 	priority: "",
 };
 
-const NewTask = () => {
+const NewTask = ({ edit = null }) => {
 	const [formFields, setFormFields] = useState(defaultFormFields);
-	const { taskName, description, priority } = formFields;
+	const { name, description, priority } = formFields;
+	const { taskId } = useParams() || {};
 
+	const getTask = () => {
+		apiCall("get", `http://localhost:8081/tasks/${taskId}`)
+			.then((res) => {
+				setFormFields(res);
+			})
+			.catch((err) => console.log(err));
+	};
+
+	useEffect(() => {
+		if (edit === "edit") {
+			getTask();
+		}
+	}, []);
 	const navigate = useNavigate();
 
 	const handleChange = (event) => {
@@ -21,10 +35,23 @@ const NewTask = () => {
 		setFormFields({ ...formFields, [name]: value });
 	};
 
+	const handleEdit = (e) => {
+		e.preventDefault();
+		apiCall("patch", `http://localhost:8081/tasks/${taskId}`, {
+			name,
+			description,
+			priority,
+		})
+			.then((res) => {
+				setFormFields(defaultFormFields);
+			})
+			.catch((err) => console.log(err));
+		navigate(`/dashboard/tasks/${taskId}`);
+	};
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		apiCall("post", "http://localhost:8081/tasks", {
-			taskName,
+			name,
 			description,
 			priority,
 		})
@@ -38,7 +65,7 @@ const NewTask = () => {
 	return (
 		<main>
 			<PublicFormContainer>
-				<form onSubmit={handleSubmit}>
+				<form onSubmit={edit === null ? handleSubmit : handleEdit}>
 					<h2>Create New Task</h2>
 					<div className="public-inputs">
 						<div className="input-box">
@@ -48,7 +75,9 @@ const NewTask = () => {
 							<input
 								onChange={handleChange}
 								type="text"
-								name="taskName"
+								name="name"
+								placeholder={name}
+								value={name}
 								required
 							/>
 						</div>
@@ -61,6 +90,7 @@ const NewTask = () => {
 									onChange={handleChange}
 									className="radio-task"
 									value="low"
+									checked={edit !== null ? priority === "low" : null}
 									type="radio"
 									name="priority"
 								/>
@@ -69,6 +99,7 @@ const NewTask = () => {
 									onChange={handleChange}
 									className="radio-task"
 									value="medium"
+									checked={edit !== null ? priority === "medium" : null}
 									type="radio"
 									name="priority"
 								/>
@@ -77,6 +108,7 @@ const NewTask = () => {
 									onChange={handleChange}
 									className="radio-task"
 									value="high"
+									checked={edit !== null ? priority === "high" : null}
 									type="radio"
 									name="priority"
 								/>
@@ -87,11 +119,21 @@ const NewTask = () => {
 							<label className="labels" htmlFor="description">
 								Description
 							</label>
-							<textarea onChange={handleChange} name="description" required />
+							<textarea
+								placeholder={description}
+								onChange={handleChange}
+								name="description"
+								value={description}
+								required
+							/>
 						</div>
 					</div>
 					<div className="public-btn-container">
-						<input className="public-btn" type="submit" value="Submit" />
+						<input
+							className="public-btn"
+							type="submit"
+							value={edit === null ? "Submit" : "Update"}
+						/>
 					</div>
 				</form>
 			</PublicFormContainer>

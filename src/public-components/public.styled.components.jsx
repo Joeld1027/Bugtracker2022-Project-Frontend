@@ -63,7 +63,7 @@ export const PublicFormContainer = styled.section`
 					width: 100%;
 					border: 1px solid black;
 					border-radius: 10px;
-					height: 100px;
+					height: 180px;
 					padding: 5px;
 					font-size: 1.1rem;
 				}

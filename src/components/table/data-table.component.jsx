@@ -56,7 +56,9 @@ const DataTable = ({ type = "Data", handleCheckbox, url }) => {
 										</th>
 									)}
 									<td className="primary">
-										<Link to={`./${data._id}`}>Details</Link>
+										{!handleCheckbox && (
+											<Link to={`./${data._id}`}>Details</Link>
+										)}
 									</td>
 								</tr>
 							);

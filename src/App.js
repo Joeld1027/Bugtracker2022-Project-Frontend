@@ -62,6 +62,7 @@ function App() {
 				<Route index element={<MainDashboard />} />
 				<Route path="tasks" element={<Tasks />} />
 				<Route path="tasks/:taskId" element={<TaskDetailsPage />} />
+				<Route path="tasks/:taskId/edit" element={<NewTask edit="edit" />} />
 				<Route path="tasks/new" element={<NewTask />} />
 				<Route path="projects" element={<Projects />} />
 				<Route path="projects/:projectId" element={<ProjectDetailsPage />} />

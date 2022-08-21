@@ -47,7 +47,7 @@
 }
 
 html {
-	font-size: 14px;
+	font-size: 16px;
 }
 
 body {
@@ -169,12 +169,12 @@ b {
 		width: 83vw !important;
 	}
 
-	main table thead tr th:last-child,
-	main table thead tr th:first-child {
+	main table thead tr th:nth-child(2),
+	main table thead tr th:nth-child(4) {
 		display: none;
 	}
-	main table tbody tr td:last-child,
-	main table tbody tr td:first-child {
+	main table tbody tr td:nth-child(2),
+	main table tbody tr td:nth-child(4) {
 		display: none;
 	}
 }
@@ -197,6 +197,9 @@ b {
 		padding-right: var(--card-padding);
 		display: none;
 		animation: showMenu 400ms ease forwards;
+	}
+	aside .active-side-menu {
+		display: block !important;
 	}
 	@keyframes showMenu {
 		to {
@@ -223,7 +226,7 @@ b {
 	}
 
 	aside .close {
-		display: inline-block;
+		display: inline-block !important;
 		cursor: pointer;
 	}
 
