@@ -30,20 +30,24 @@ const DataTable = ({ type = "Data", handleCheckbox, url }) => {
 						<th>Name</th>
 						<th>Priority</th>
 						{type === "Projects" && <th>Due Date</th>}
-						<th>Status</th>
+						{type === "Tasks" && <th>Status</th>}
+						<th></th>
 						{type === "Tasks" && handleCheckbox && <th>Add to Project</th>}
 					</tr>
 				</thead>
 				<tbody>
 					{fetchedData ? (
 						fetchedData.map((data) => {
-							let date = data.deadline || null;
+							let date = new Date(data.deadline).toLocaleDateString() || null;
 							return (
 								<tr key={data._id}>
 									<td>{data.name}</td>
 									<td>{data.priority}</td>
-									{type === "Projects" && <td>{date && date.split("T")[0]}</td>}
-									<td className="warning">{data.status}</td>
+									{type === "Projects" && <td>{date}</td>}
+									{type === "Tasks" && (
+										<td className="warning">{data.status}</td>
+									)}
+									<td></td>
 									{type === "Tasks" && handleCheckbox && (
 										<th>
 											<input

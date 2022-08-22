@@ -7,7 +7,7 @@ export const MainContainer = styled.main`
 		border-radius: 1.2rem;
 		background: #fff;
 		padding: 1.2rem;
-		line-height: 1.8rem;
+		line-height: 1.5rem;
 		transition: all 300ms ease;
 
 		.task-details-top {
@@ -20,10 +20,13 @@ export const MainContainer = styled.main`
 				padding: 0;
 			}
 			span {
-				border: 1px solid;
+				border: none;
 				border-radius: 1.3rem;
 				padding: 0.2rem 1.3rem;
 			}
+		}
+		p:first-child {
+			text-transform: uppercase;
 		}
 		p span {
 			font-size: 1.1rem;
