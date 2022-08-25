@@ -12,7 +12,9 @@ const ProjectDetailsPage = () => {
 
 	const getProject = () => {
 		apiCall("get", `http://localhost:8081/projects/${projectId}`)
-			.then((res) => setProject(res))
+			.then((res) => {
+				setProject(res);
+			})
 			.catch((err) => console.log(err));
 	};
 
@@ -22,8 +24,14 @@ const ProjectDetailsPage = () => {
 
 	const handleDelete = () => {
 		apiCall("delete", `http://localhost:8081/projects/${projectId}`)
-			.then((res) => console.log(res))
-			.catch((err) => console.log(err));
+			.then((res) => console.log("deleted " + res.name))
+			.catch((err) => {
+				console.log(err);
+				if (err.response.status === 401) {
+					navigate("/auth");
+					return;
+				}
+			});
 		navigate("/dashboard/projects");
 	};
 

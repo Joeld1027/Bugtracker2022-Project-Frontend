@@ -1,5 +1,5 @@
 main {
-	/* display: inline-block; */
+	display: inline-block;
 	margin-top: 1.4rem;
 }
 
@@ -8,7 +8,7 @@ main .date {
 	background: var(--color-light);
 	border-radius: var(--border-radius-1);
 	margin-top: 1rem;
-	padding: 0.5rem 1.6rem;
+	padding: 0.5rem 1rem;
 }
 
 main .date input[type="date"] {
@@ -18,8 +18,8 @@ main .date input[type="date"] {
 
 main .insights {
 	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	gap: 1.6rem;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 1.2rem;
 }
 
 main .insights > div {

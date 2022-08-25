@@ -17,6 +17,7 @@ import { setTokenHeader, apiCall } from "./service/apiCall";
 import { useEffect } from "react";
 import TaskDetailsPage from "./routes/tasks/task-details.component.jsx";
 import ProjectDetailsPage from "./routes/projects/project-details.component.jsx";
+import ProfilePage from "./routes/profile/profile.component.jsx";
 
 function App() {
 	const navigate = useNavigate();
@@ -66,8 +67,13 @@ function App() {
 				<Route path="tasks/new" element={<NewTask />} />
 				<Route path="projects" element={<Projects />} />
 				<Route path="projects/:projectId" element={<ProjectDetailsPage />} />
+				<Route
+					path="projects/:projectId/edit"
+					element={<NewProject edit="edit" />}
+				/>
 				<Route path="projects/new" element={<NewProject />} />
 				<Route path="users" element={<Users />} />
+				<Route path="profile" element={<ProfilePage />} />
 			</Route>
 		</Routes>
 	);

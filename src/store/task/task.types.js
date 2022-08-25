@@ -1,0 +1,3 @@
+export const TASK_ACTION_TYPES = {
+	SET_ALL_TASKS: "SET_ALL_TASKS",
+};

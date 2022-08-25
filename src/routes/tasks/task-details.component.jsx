@@ -7,6 +7,7 @@ const TaskDetailsPage = () => {
 	const { taskId } = useParams();
 	const [task, setTask] = useState({});
 	const { name, createdDate, status, priority, description } = task;
+	const date = new Date(createdDate).toLocaleDateString();
 	const navigate = useNavigate();
 
 	const getTask = () => {
@@ -46,9 +47,7 @@ const TaskDetailsPage = () => {
 				<div className="task-details-top">
 					<div>
 						<h1>{name}</h1>
-						<span className="task-date text-muted">
-							Created On {createdDate}
-						</span>
+						<span className="task-date text-muted">Created On {date}</span>
 					</div>
 					<span className={` ${handleStatus(status)}`}>
 						This task is {status}

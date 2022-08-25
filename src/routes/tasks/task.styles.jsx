@@ -7,7 +7,7 @@ export const MainContainer = styled.main`
 		border-radius: 1.2rem;
 		background: #fff;
 		padding: 1.2rem;
-		line-height: 1.5rem;
+
 		transition: all 300ms ease;
 
 		.task-details-top {
@@ -15,14 +15,14 @@ export const MainContainer = styled.main`
 			justify-content: space-between;
 			align-items: center;
 			margin-bottom: 1rem;
+			line-height: 1.9rem;
 			.task-date {
-				border: none;
+				border-bottom: 1px solid;
+				border-radius: 0;
 				padding: 0;
 			}
 			span {
-				border: none;
-				border-radius: 1.3rem;
-				padding: 0.2rem 1.3rem;
+				border-bottom: 1px solid;
 			}
 		}
 		p:first-child {
@@ -37,7 +37,10 @@ export const MainContainer = styled.main`
 		box-shadow: none;
 	}
 
-	@media (max-width: 1200px) {
+	@media (max-width: 400px) {
+		.task-details-top {
+			flex-direction: column;
+		}
 	}
 `;
 

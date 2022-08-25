@@ -130,7 +130,7 @@ b {
 	display: grid;
 	width: 96%;
 	margin: 0 auto;
-	gap: 1.8rem;
+	gap: 1.4rem;
 	grid-template-columns: 14rem auto 15rem;
 }
 /* Media Queries */
