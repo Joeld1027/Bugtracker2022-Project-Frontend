@@ -1,8 +1,12 @@
 import DataTable from "../../components/table/data-table.component";
 import { Link } from "react-router-dom";
 import "./tasks.styles.css";
+import { useSelector } from "react-redux";
+import { selectAllTasks } from "../../store/task/task.selectors";
 
 const Tasks = () => {
+	const allTasks = useSelector(selectAllTasks);
+
 	return (
 		<main>
 			<div className="tasks-header-container">
@@ -12,7 +16,7 @@ const Tasks = () => {
 					<h3>Add New Task</h3>
 				</Link>
 			</div>
-			<DataTable url="tasks" type="Tasks" />
+			<DataTable url="tasks" type="Tasks" tableData={allTasks} />
 		</main>
 	);
 };

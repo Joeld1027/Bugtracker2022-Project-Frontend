@@ -1,26 +1,15 @@
-import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import { apiCall } from "../../service/apiCall";
+import { selectCurrentProject } from "../../store/project/project.selector";
 import { MainContainer, TaskDetailButtonContainer } from "../tasks/task.styles";
 
 const ProjectDetailsPage = () => {
 	const navigate = useNavigate();
 	const { projectId } = useParams();
-	const [project, setProject] = useState({});
+	const [project] = useSelector(selectCurrentProject(projectId));
 	const { name, priority, createdBy, description, created } = project;
 	const date = new Date(created).toLocaleDateString();
-
-	const getProject = () => {
-		apiCall("get", `http://localhost:8081/projects/${projectId}`)
-			.then((res) => {
-				setProject(res);
-			})
-			.catch((err) => console.log(err));
-	};
-
-	useEffect(() => {
-		getProject();
-	}, []);
 
 	const handleDelete = () => {
 		apiCall("delete", `http://localhost:8081/projects/${projectId}`)

@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { PublicFormContainer } from "../../public-components/public.styled.components";
 import { apiCall } from "../../service/apiCall";
+import { selectCurrentTask } from "../../store/task/task.selectors";
 
 const defaultFormFields = {
 	name: "",
@@ -14,18 +16,11 @@ const NewTask = ({ edit = null }) => {
 	const [formFields, setFormFields] = useState(defaultFormFields);
 	const { name, description, priority } = formFields;
 	const { taskId } = useParams() || {};
-
-	const getTask = () => {
-		apiCall("get", `http://localhost:8081/tasks/${taskId}`)
-			.then((res) => {
-				setFormFields(res);
-			})
-			.catch((err) => console.log(err));
-	};
+	const [task] = useSelector(selectCurrentTask(taskId));
 
 	useEffect(() => {
 		if (edit === "edit") {
-			getTask();
+			setFormFields(task);
 		}
 	}, []);
 	const navigate = useNavigate();

@@ -1,26 +1,15 @@
-import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { apiCall } from "../../service/apiCall";
+import { selectCurrentTask } from "../../store/task/task.selectors";
 import { MainContainer, TaskDetailButtonContainer } from "./task.styles";
 
 const TaskDetailsPage = () => {
 	const { taskId } = useParams();
-	const [task, setTask] = useState({});
+	const [task] = useSelector(selectCurrentTask(taskId));
 	const { name, createdDate, status, priority, description } = task;
 	const date = new Date(createdDate).toLocaleDateString();
 	const navigate = useNavigate();
-
-	const getTask = () => {
-		apiCall("get", `http://localhost:8081/tasks/${taskId}`)
-			.then((res) => {
-				setTask(res);
-			})
-			.catch((err) => console.log(err));
-	};
-
-	useEffect(() => {
-		getTask();
-	}, []);
 
 	const handleDelete = () => {
 		apiCall("delete", `http://localhost:8081/tasks/${taskId}`)

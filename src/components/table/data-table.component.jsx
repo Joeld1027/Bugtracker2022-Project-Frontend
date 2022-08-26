@@ -1,26 +1,7 @@
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { apiCall } from "../../service/apiCall";
 import "./data-table.styles.css";
 
-const DataTable = ({ type = "Data", handleCheckbox, url }) => {
-	const [fetchedData, setFetchedData] = useState([]);
-
-	const fetchTableData = (type) => {
-		if (type === "Data") return;
-		apiCall("get", `http://localhost:8081/${url}`)
-			.then((response) => {
-				setFetchedData(response);
-			})
-			.catch((err) => console.log(err));
-	};
-
-	useEffect(() => {
-		if (url) {
-			fetchTableData();
-		}
-	}, []);
-
+const DataTable = ({ type = "Data", handleCheckbox, tableData }) => {
 	return (
 		<div className="data-table">
 			<h2>All {type}</h2>
@@ -36,8 +17,8 @@ const DataTable = ({ type = "Data", handleCheckbox, url }) => {
 					</tr>
 				</thead>
 				<tbody>
-					{fetchedData ? (
-						fetchedData.map((data) => {
+					{tableData ? (
+						tableData.map((data) => {
 							let date = new Date(data.deadline).toLocaleDateString() || null;
 							return (
 								<tr key={data._id}>

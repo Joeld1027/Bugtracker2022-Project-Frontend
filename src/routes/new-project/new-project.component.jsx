@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import DataTable from "../../components/table/data-table.component";
 import { PublicFormContainer } from "../../public-components/public.styled.components";
 import { apiCall } from "../../service/apiCall";
+import { selectCurrentProject } from "../../store/project/project.selector";
 
 const defaultFormFields = {
 	name: "",
@@ -17,20 +19,13 @@ const NewProject = ({ edit = null }) => {
 	const [formFields, setFormFields] = useState(defaultFormFields);
 	const { name, description, priority } = formFields;
 	const navigate = useNavigate();
+	const [project] = useSelector(selectCurrentProject(projectId));
 
 	const deadline = new Date(formFields.deadline).toLocaleDateString();
 
-	const getProject = () => {
-		apiCall("get", `http://localhost:8081/projects/${projectId}`)
-			.then((res) => {
-				setFormFields(res);
-			})
-			.catch((err) => console.log(err));
-	};
-
 	useEffect(() => {
 		if (edit === "edit") {
-			getProject();
+			setFormFields(project);
 		}
 	}, []);
 

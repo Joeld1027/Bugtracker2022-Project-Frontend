@@ -1,19 +1,10 @@
-import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import "../../components/table/data-table.styles.css";
-import { apiCall } from "../../service/apiCall";
+import { selectAllUsers } from "../../store/user/user.selector";
 
 const Users = () => {
-	const [users, setUsers] = useState([]);
-	const getAllUsers = () => {
-		apiCall("get", "http://localhost:8081/users")
-			.then((res) => {
-				setUsers(res);
-			})
-			.catch((err) => console.log(err));
-	};
-	useEffect(() => {
-		getAllUsers();
-	}, []);
+	const users = useSelector(selectAllUsers);
+
 	return (
 		<main>
 			<div className="tasks-header-container">

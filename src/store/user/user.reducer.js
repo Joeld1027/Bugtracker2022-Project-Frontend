@@ -4,6 +4,7 @@ const INITIAL_STATE = {
 	currentUser: null,
 	token: "",
 	active: false,
+	allUsers: [],
 };
 
 export const userReducer = (state = INITIAL_STATE, action) => {
@@ -15,6 +16,11 @@ export const userReducer = (state = INITIAL_STATE, action) => {
 				...state,
 				currentUser: payload.user,
 				token: payload.token,
+			};
+		case USER_ACTION_TYPES.SET_ALL_USERS:
+			return {
+				...state,
+				allUsers: payload,
 			};
 		case USER_ACTION_TYPES.SET_USER_TOKEN:
 			return {
