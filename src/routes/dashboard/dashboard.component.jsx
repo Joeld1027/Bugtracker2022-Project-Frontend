@@ -6,6 +6,7 @@ import RightSideMenu from "../../components/right-side-menu/right-side-menu.comp
 import { fetchAllTasksAsync } from "../../store/task/task.actions";
 import { fetchAllProjectsAsync } from "../../store/project/project.actions";
 import { fetchAllUsersAsync } from "../../store/user/user.action";
+import { Spinner } from "../../public-components/public.styled.components";
 
 const Dashboard = () => {
 	const dispatch = useDispatch();
@@ -20,6 +21,11 @@ const Dashboard = () => {
 		<div className="container">
 			<Aside />
 			<Outlet />
+			{/* <main>
+				<Spinner>
+					<div className="inner-text">LOADING...</div>
+				</Spinner>
+			</main> */}
 			<RightSideMenu />
 		</div>
 	);

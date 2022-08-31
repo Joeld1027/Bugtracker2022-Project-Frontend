@@ -47,7 +47,15 @@ export const ProfileContainer = styled.main`
 	.update-link {
 		display: flex;
 		justify-content: end;
-		margin: 1rem 0;
+		margin: 1rem;
 		padding: 0.8rem;
+
+		button {
+			cursor: pointer;
+			transition: all 300ms;
+			:hover {
+				transform: translate(0rem, -0.2ex);
+			}
+		}
 	}
 `;

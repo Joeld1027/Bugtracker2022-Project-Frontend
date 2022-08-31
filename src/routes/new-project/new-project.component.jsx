@@ -79,7 +79,7 @@ const NewProject = ({ edit = null }) => {
 					<h2>Create New Project</h2>
 					<div className="public-inputs">
 						<div className="input-box">
-							<label className="labels" htmlFor="projectName">
+							<label className="labels" htmlFor="name">
 								Project Name
 							</label>
 							<input

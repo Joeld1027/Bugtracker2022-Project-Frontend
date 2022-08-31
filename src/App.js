@@ -18,6 +18,8 @@ import { useEffect } from "react";
 import TaskDetailsPage from "./routes/tasks/task-details.component.jsx";
 import ProjectDetailsPage from "./routes/projects/project-details.component.jsx";
 import ProfilePage from "./routes/profile/profile.component.jsx";
+import UserDetailsPage from "./routes/users/user.details.componet.jsx";
+import UserEditPage from "./routes/users/edit-user.component.jsx";
 
 function App() {
 	const navigate = useNavigate();
@@ -73,7 +75,9 @@ function App() {
 				/>
 				<Route path="projects/new" element={<NewProject />} />
 				<Route path="users" element={<Users />} />
+				<Route path="users/:userId" element={<UserDetailsPage />} />
 				<Route path="profile" element={<ProfilePage />} />
+				<Route path="profile/edit" element={<UserEditPage />} />
 			</Route>
 		</Routes>
 	);

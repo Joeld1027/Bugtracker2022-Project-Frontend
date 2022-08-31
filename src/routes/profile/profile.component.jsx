@@ -2,10 +2,17 @@ import { ProfileContainer } from "./profile.styles";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../store/user/user.selector";
+import { useEffect, useState } from "react";
 
-const ProfilePage = () => {
+const ProfilePage = ({ receivedUser = null, details = false }) => {
 	const currentUser = useSelector(selectCurrentUser);
-	const { name, role, username } = currentUser || {};
+	const [user, setUser] = useState({});
+	const { name, role, username } = user || {};
+
+	useEffect(() => {
+		if (receivedUser) return setUser(receivedUser);
+		return setUser(currentUser);
+	}, []);
 
 	return (
 		<ProfileContainer>
@@ -27,9 +34,13 @@ const ProfilePage = () => {
 				</div>
 			</section>
 			<div className="update-link">
-				<Link className="primary" to="profile/edit">
-					Update your Profile
-				</Link>
+				{details === false ? (
+					<Link className="primary" to={`./edit`}>
+						Update your Profile
+					</Link>
+				) : (
+					<button className="danger">Delete this User</button>
+				)}
 			</div>
 		</ProfileContainer>
 	);

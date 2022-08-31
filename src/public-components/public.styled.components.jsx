@@ -95,3 +95,34 @@ export const PublicFormContainer = styled.section`
 		font-size: 1.1rem;
 	}
 `;
+
+export const Spinner = styled.div`
+	@keyframes spinner {
+		0% {
+			transform: translate3d(-50%, -50%, 0) rotate(0deg);
+		}
+		100% {
+			transform: translate3d(-50%, -50%, 0) rotate(360deg);
+		}
+	}
+	::before {
+		animation: 1.5s linear infinite spinner;
+		animation-play-state: inherit;
+		border: solid 5px #cfd0d1;
+		border-bottom-color: #1c87c9;
+		border-radius: 50%;
+		content: "";
+		height: 100px;
+		width: 100px;
+		position: absolute;
+		top: 29.7%;
+		left: 50%;
+		transform: translate3d(-50%, -50%, 0);
+		will-change: transform;
+	}
+	.inner-text {
+		position: absolute;
+		top: 29%;
+		left: 47.8%;
+	}
+`;

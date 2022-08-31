@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import "../../components/table/data-table.styles.css";
 import { selectAllUsers } from "../../store/user/user.selector";
 
@@ -27,7 +28,9 @@ const Users = () => {
 									<td>{name}</td>
 									<td>{username}</td>
 									<td>{role}</td>
-									<td className="primary">Details</td>
+									<td className="primary">
+										<Link to={`./${user._id}`}>Details</Link>
+									</td>
 								</tr>
 							);
 						})}
