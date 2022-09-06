@@ -6,13 +6,13 @@ import thunk from "redux-thunk";
 
 import { rootReducer } from "./root.reducer";
 
-const persistConfig = {
-	key: "root",
-	storage,
-	blacklist: ["user"],
-};
+// const persistConfig = {
+// 	key: "root",
+// 	storage,
+// 	blacklist: ["user"],
+// };
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+// const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const middlewares = [
 	process.env.NODE_ENV === "development" && logger,
@@ -28,9 +28,9 @@ const composeEnhancer =
 const composedEnhancers = composeEnhancer(applyMiddleware(...middlewares));
 
 export const store = createStore(
-	persistedReducer,
-	undefined,
+	// persistedReducer,
+	rootReducer,
 	composedEnhancers
 );
 
-export const persistor = persistStore(store);
+// export const persistor = persistStore(store);

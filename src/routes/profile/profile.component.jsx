@@ -1,18 +1,27 @@
 import { ProfileContainer } from "./profile.styles";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { selectCurrentUser } from "../../store/user/user.selector";
 import { useEffect, useState } from "react";
+import { deleteUser } from "../../store/user/user.action";
 
 const ProfilePage = ({ receivedUser = null, details = false }) => {
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
 	const currentUser = useSelector(selectCurrentUser);
 	const [user, setUser] = useState({});
-	const { name, role, username } = user || {};
+	const { name, role, username, userSince, _id } = user;
+	const userDate = new Date(userSince).toLocaleDateString();
 
 	useEffect(() => {
 		if (receivedUser) return setUser(receivedUser);
 		return setUser(currentUser);
-	}, []);
+	}, [currentUser]);
+
+	const handleDelete = () => {
+		dispatch(deleteUser(_id));
+		navigate("/dashboard/users");
+	};
 
 	return (
 		<ProfileContainer>
@@ -27,7 +36,7 @@ const ProfilePage = ({ receivedUser = null, details = false }) => {
 					<h2 className="primary">
 						{name} <span className="text-muted">*{role}*</span>
 					</h2>
-					<p className="text-muted">usersince</p>
+					<p className="text-muted">Joined on {userDate}</p>
 					<h3 className="contact-info">Contact Information</h3>
 					<p>{username}</p>
 					<p>1-800-xxx-xxxx</p>
@@ -39,7 +48,9 @@ const ProfilePage = ({ receivedUser = null, details = false }) => {
 						Update your Profile
 					</Link>
 				) : (
-					<button className="danger">Delete this User</button>
+					<button onClick={handleDelete} className="danger">
+						Delete this User
+					</button>
 				)}
 			</div>
 		</ProfileContainer>
