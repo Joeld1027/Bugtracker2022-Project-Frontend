@@ -1,72 +1,27 @@
+import { useSelector } from "react-redux";
+import ProjectCard from "../project-card/project-card.component";
 import DataTable from "../table/data-table.component";
 import "./main-dashboard.styles.css";
+import { selectCurrentUser } from "../../store/user/user.selector";
 
 const MainDashboard = () => {
+	const currentUser = useSelector(selectCurrentUser);
+	const { assignedTasks, assignedProjects } = currentUser;
+
 	return (
 		<main>
 			<h1>Dashboard</h1>
+			{assignedProjects.legnth > 0 ? (
+				<div className="card-container">
+					<ProjectCard cardData={assignedProjects} />
+				</div>
+			) : (
+				<div className="empty-message">
+					<h2>No Projects Assigned to you.</h2>
+				</div>
+			)}
 
-			<div className="insights">
-				<div className="sales">
-					<span className="material-symbols-sharp"> analytics </span>
-					<div className="middle">
-						<div className="left">
-							<h3>Total Sales</h3>
-							<h1>$25,024</h1>
-						</div>
-						<div className="progress">
-							<svg>
-								<circle cx="38" cy="38" r="36"></circle>
-							</svg>
-							<div className="number">
-								<p>81%</p>
-							</div>
-						</div>
-					</div>
-					<small className="text-muted"> Last 24 hours </small>
-				</div>
-				{/* <!-- =============End of Sales=============== --> */}
-				<div className="expenses">
-					<span className="material-symbols-sharp"> bar_chart </span>
-					<div className="middle">
-						<div className="left">
-							<h3>Total Expenses</h3>
-							<h1>$14,160</h1>
-						</div>
-						<div className="progress">
-							<svg>
-								<circle cx="38" cy="38" r="36"></circle>
-							</svg>
-							<div className="number">
-								<p>62%</p>
-							</div>
-						</div>
-					</div>
-					<small className="text-muted"> Last 24 hours </small>
-				</div>
-				{/* <!-- =============End of Expenses=============== --> */}
-				<div className="income">
-					<span className="material-symbols-sharp"> stacked_line_chart </span>
-					<div className="middle">
-						<div className="left">
-							<h3>Total Income</h3>
-							<h1>$10,864</h1>
-						</div>
-						<div className="progress">
-							<svg>
-								<circle cx="38" cy="38" r="36"></circle>
-							</svg>
-							<div className="number">
-								<p>44%</p>
-							</div>
-						</div>
-					</div>
-					<small className="text-muted"> Last 24 hours </small>
-				</div>
-				{/* <!-- =============End of Income=============== --> */}
-			</div>
-			{/* <!-- <==============End of Insights===================> --> */}
-			<DataTable />
+			<DataTable title="Your Tasks" type="Tasks" tableData={assignedTasks} />
 		</main>
 	);
 };

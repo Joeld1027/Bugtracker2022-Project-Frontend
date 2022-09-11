@@ -18,3 +18,20 @@ export const fetchAllProjectsAsync = () => {
 		}
 	};
 };
+
+export const editProjectAsync = (id, data) => {
+	console.log(data);
+
+	try {
+		const editedProject = apiCall(
+			"patch",
+			`http://localhost:8081/projects/${id}`,
+			{
+				...data,
+			}
+		);
+		console.log(editedProject);
+	} catch (error) {
+		console.log(error);
+	}
+};

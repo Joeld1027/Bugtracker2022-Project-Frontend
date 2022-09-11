@@ -10,7 +10,7 @@ const Tasks = () => {
 	return (
 		<main>
 			<div className="tasks-header-container">
-				<h1>Tasks</h1>
+				<h1>All Tasks</h1>
 				<Link className="primary" to="new">
 					<span className="material-symbols-sharp">add</span>
 					<h3>Add New Task</h3>

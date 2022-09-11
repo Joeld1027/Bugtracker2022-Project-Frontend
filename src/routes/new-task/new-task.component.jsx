@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-
+import { fetchAllTasksAsync } from "../../store/task/task.actions";
 import { PublicFormContainer } from "../../public-components/public.styled.components";
 import { apiCall } from "../../service/apiCall";
 import { selectCurrentTask } from "../../store/task/task.selectors";
@@ -13,6 +13,7 @@ const defaultFormFields = {
 };
 
 const NewTask = ({ edit = null }) => {
+	const dispatch = useDispatch();
 	const [formFields, setFormFields] = useState(defaultFormFields);
 	const { name, description, priority } = formFields;
 	const { taskId } = useParams() || {};
@@ -41,6 +42,7 @@ const NewTask = ({ edit = null }) => {
 				setFormFields(defaultFormFields);
 			})
 			.catch((err) => console.log(err));
+		dispatch(fetchAllTasksAsync());
 		navigate(`/dashboard/tasks/${taskId}`);
 	};
 	const handleSubmit = (e) => {
@@ -52,6 +54,7 @@ const NewTask = ({ edit = null }) => {
 		})
 			.then((res) => {
 				setFormFields(defaultFormFields);
+				dispatch(fetchAllTasksAsync());
 				navigate("/dashboard/tasks");
 			})
 			.catch((err) => console.log(err));

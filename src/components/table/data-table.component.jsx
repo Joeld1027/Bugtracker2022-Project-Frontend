@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import "./data-table.styles.css";
 
-const DataTable = ({ type = "Data", handleCheckbox, tableData }) => {
+const DataTable = ({ type = "Data", handleCheckbox, tableData, title }) => {
 	return (
 		<div className="data-table">
-			<h2>All {type}</h2>
+			<h2>{title}</h2>
 			<table>
 				<thead>
 					<tr>
@@ -17,7 +17,7 @@ const DataTable = ({ type = "Data", handleCheckbox, tableData }) => {
 					</tr>
 				</thead>
 				<tbody>
-					{tableData ? (
+					{tableData && tableData.length > 0 ? (
 						tableData.map((data) => {
 							let date = new Date(data.deadline).toLocaleDateString() || null;
 							return (
@@ -42,7 +42,9 @@ const DataTable = ({ type = "Data", handleCheckbox, tableData }) => {
 									)}
 									<td className="primary">
 										{!handleCheckbox && (
-											<Link to={`./${data._id}`}>Details</Link>
+											<Link to={`/dashboard/${type.toLowerCase()}/${data._id}`}>
+												Details
+											</Link>
 										)}
 									</td>
 								</tr>
@@ -50,7 +52,7 @@ const DataTable = ({ type = "Data", handleCheckbox, tableData }) => {
 						})
 					) : (
 						<tr>
-							<td>No {type} available </td>
+							<td>No {type} Available</td>
 						</tr>
 					)}
 				</tbody>

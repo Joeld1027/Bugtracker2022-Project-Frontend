@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import ProjectCard from "../../components/project-card/project-card.component";
 import { apiCall } from "../../service/apiCall";
 import { selectCurrentTask } from "../../store/task/task.selectors";
 import { MainContainer, TaskDetailButtonContainer } from "./task.styles";
@@ -7,7 +8,8 @@ import { MainContainer, TaskDetailButtonContainer } from "./task.styles";
 const TaskDetailsPage = () => {
 	const { taskId } = useParams();
 	const [task] = useSelector(selectCurrentTask(taskId));
-	const { name, createdDate, status, priority, description } = task;
+	const { name, createdDate, status, priority, description, assignedProject } =
+		task;
 	const date = new Date(createdDate).toLocaleDateString();
 	const navigate = useNavigate();
 
@@ -57,6 +59,8 @@ const TaskDetailsPage = () => {
 					<button onClick={handleDelete} className="danger" children="Delete" />
 				</TaskDetailButtonContainer>
 			</section>
+			<h2>Assigned Project</h2>
+			<ProjectCard cardData={assignedProject} />
 		</MainContainer>
 	);
 };

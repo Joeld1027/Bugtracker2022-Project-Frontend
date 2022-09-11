@@ -1,14 +1,24 @@
 import { useSelector } from "react-redux";
 import { useNavigate, useParams, Link } from "react-router-dom";
+import DataTable from "../../components/table/data-table.component";
 import { apiCall } from "../../service/apiCall";
 import { selectCurrentProject } from "../../store/project/project.selector";
 import { MainContainer, TaskDetailButtonContainer } from "../tasks/task.styles";
+import UserTable from "../../components/user-table/user-table.component";
 
 const ProjectDetailsPage = () => {
 	const navigate = useNavigate();
 	const { projectId } = useParams();
 	const [project] = useSelector(selectCurrentProject(projectId));
-	const { name, priority, createdBy, description, created } = project;
+	const {
+		name,
+		priority,
+		createdBy,
+		description,
+		created,
+		projectTasks,
+		assignedDevs,
+	} = project;
 	const date = new Date(created).toLocaleDateString();
 
 	const handleDelete = () => {
@@ -49,6 +59,9 @@ const ProjectDetailsPage = () => {
 					<button onClick={handleDelete} className="danger" children="Delete" />
 				</TaskDetailButtonContainer>
 			</section>
+
+			<DataTable type="Tasks" tableData={projectTasks} title="Project Tasks" />
+			<UserTable users={assignedDevs} title="Assigned Developers" />
 		</MainContainer>
 	);
 };

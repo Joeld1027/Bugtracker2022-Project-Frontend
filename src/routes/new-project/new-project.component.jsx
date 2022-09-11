@@ -1,10 +1,17 @@
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import DataTable from "../../components/table/data-table.component";
 import { PublicFormContainer } from "../../public-components/public.styled.components";
 import { apiCall } from "../../service/apiCall";
+import {
+	editProjectAsync,
+	fetchAllProjectsAsync,
+} from "../../store/project/project.actions";
+import { fetchAllTasksAsync } from "../../store/task/task.actions";
 import { selectCurrentProject } from "../../store/project/project.selector";
+import { selectFreshTasks } from "../../store/task/task.selectors";
+import UserTable from "../../components/user-table/user-table.component";
 
 const defaultFormFields = {
 	name: "",
@@ -15,17 +22,26 @@ const defaultFormFields = {
 };
 
 const NewProject = ({ edit = null }) => {
+	const dispatch = useDispatch();
 	const { projectId } = useParams();
 	const [formFields, setFormFields] = useState(defaultFormFields);
 	const { name, description, priority } = formFields;
 	const navigate = useNavigate();
 	const [project] = useSelector(selectCurrentProject(projectId));
+	const { projectTasks, assignedDevs } = project || [];
+	const allTasks = useSelector(selectFreshTasks);
 
 	const deadline = new Date(formFields.deadline).toLocaleDateString();
 
 	useEffect(() => {
 		if (edit === "edit") {
-			setFormFields(project);
+			setFormFields({
+				name: project.name,
+				description: project.description,
+				priority: project.priority,
+				deadline: project.deadline,
+				addTasks: [],
+			});
 		}
 	}, []);
 
@@ -52,6 +68,8 @@ const NewProject = ({ edit = null }) => {
 		})
 			.then((res) => {
 				setFormFields({ ...defaultFormFields, addTasks: [] });
+				dispatch(fetchAllProjectsAsync());
+				dispatch(fetchAllTasksAsync());
 				navigate("/dashboard/projects");
 			})
 			.catch((err) => console.log(err));
@@ -59,16 +77,9 @@ const NewProject = ({ edit = null }) => {
 
 	const handleEdit = (e) => {
 		e.preventDefault();
-		apiCall("patch", `http://localhost:8081/projects/${projectId}`, {
-			name,
-			description,
-			priority,
-			deadline,
-		})
-			.then((res) => {
-				setFormFields(defaultFormFields);
-			})
-			.catch((err) => console.log(err));
+		editProjectAsync(projectId, formFields);
+		dispatch(fetchAllProjectsAsync());
+		dispatch(fetchAllTasksAsync());
 		navigate(`/dashboard/projects/${projectId}`);
 	};
 
@@ -146,7 +157,24 @@ const NewProject = ({ edit = null }) => {
 							/>
 						</div>
 					</div>
-					<DataTable url="tasks" handleCheckbox={handleCheckbox} type="Tasks" />
+					{!edit && (
+						<DataTable
+							handleCheckbox={handleCheckbox}
+							type="Tasks"
+							title={"Open Tasks"}
+							tableData={allTasks}
+						/>
+					)}
+
+					{edit && (
+						<DataTable
+							handleCheckbox={handleCheckbox}
+							type="Tasks"
+							title="Add Tasks"
+							tableData={allTasks}
+						/>
+					)}
+					<UserTable title="Add Developer" users={assignedDevs} />
 					<div className="public-btn-container">
 						<input className="public-btn" type="submit" value="Submit" />
 					</div>

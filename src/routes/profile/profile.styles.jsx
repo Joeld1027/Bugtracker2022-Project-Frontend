@@ -7,7 +7,7 @@ export const ProfileContainer = styled.main`
 		margin-top: 3rem;
 		background: #fff;
 		padding: 1.3rem;
-		border-radius: 1.2rem;
+		border-radius: 1.2rem 1.2rem 10rem 1.2rem;
 		box-shadow: var(--box-shadow);
 		transition: all 300ms ease;
 		h2 span {
@@ -31,6 +31,7 @@ export const ProfileContainer = styled.main`
 			flex-direction: column;
 			align-items: center;
 			text-align: center;
+			border-radius: 1.2rem;
 
 			.user-information {
 				margin: 2rem 0;

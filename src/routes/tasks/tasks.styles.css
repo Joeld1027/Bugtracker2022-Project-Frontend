@@ -4,9 +4,9 @@
 	margin-top: 3rem;
 	align-items: center;
 }
-.tasks-header-container h1 {
+/* .tasks-header-container h1 {
 	text-transform: uppercase;
-}
+} */
 
 .tasks-header-container a {
 	display: flex;

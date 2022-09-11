@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import "../../components/table/data-table.styles.css";
+import UserTable from "../../components/user-table/user-table.component";
 import { selectAllUsers } from "../../store/user/user.selector";
 
 const Users = () => {
@@ -11,32 +11,7 @@ const Users = () => {
 			<div className="tasks-header-container">
 				<h1>Users</h1>
 			</div>
-			<div className="data-table">
-				<table>
-					<thead>
-						<tr>
-							<th>Name</th>
-							<th>Email</th>
-							<th>Role</th>
-						</tr>
-					</thead>
-					<tbody>
-						{users.map((user) => {
-							const { name, username, role } = user;
-							return (
-								<tr key={user._id}>
-									<td>{name}</td>
-									<td>{username}</td>
-									<td>{role}</td>
-									<td className="primary">
-										<Link to={`./${user._id}`}>Details</Link>
-									</td>
-								</tr>
-							);
-						})}
-					</tbody>
-				</table>
-			</div>
+			<UserTable users={users} />
 		</main>
 	);
 };

@@ -1,6 +1,12 @@
 import styled from "styled-components";
 
 export const MainContainer = styled.main`
+	h2 {
+		margin-top: 2rem;
+	}
+	.card-body {
+		width: 100%;
+	}
 	section {
 		box-shadow: var(--box-shadow);
 		margin-top: 3rem;
