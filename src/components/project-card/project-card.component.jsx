@@ -1,6 +1,7 @@
 const ProjectCard = ({ cardData = {} }) => {
-	const [project] = cardData;
+	const project = cardData;
 	const { name, deadline, projectTasks } = project;
+
 	return (
 		<div className="card-body">
 			<div>

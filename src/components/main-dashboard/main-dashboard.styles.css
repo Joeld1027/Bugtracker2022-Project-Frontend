@@ -6,6 +6,7 @@ main {
 main .card-container {
 	display: flex;
 	justify-content: space-between;
+	flex-wrap: wrap;
 }
 
 main .empty-message {

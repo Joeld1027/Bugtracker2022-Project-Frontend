@@ -52,27 +52,32 @@ export const MainContainer = styled.main`
 
 export const TaskDetailButtonContainer = styled.div`
 	display: flex;
-	justify-content: end;
+	justify-content: space-between;
 	align-items: center;
 
 	a {
-		color: rgb(242, 187, 5);
+		color: #fff;
 		border: 1px solid;
 		border-radius: 1.3rem;
 		padding: 0.3rem 1.3rem;
 		margin-left: 1rem;
 		font-size: 1rem;
 		cursor: pointer;
-		background: #fff;
+		background: #ffbb55;
+	}
+	.success {
+		margin: 1rem 0;
+		background: #41f1b6;
 	}
 
 	button {
 		border: 1px solid;
 		border-radius: 1.3rem;
-		padding: 0.6rem 1.3rem;
+		padding: 0.4rem 1.3rem;
 		margin-left: 1rem;
 		font-size: 1rem;
 		cursor: pointer;
-		background: #fff;
+		background: #ff7782;
+		color: #fff;
 	}
 `;

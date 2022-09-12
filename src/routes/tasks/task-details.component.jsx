@@ -8,8 +8,8 @@ import { MainContainer, TaskDetailButtonContainer } from "./task.styles";
 const TaskDetailsPage = () => {
 	const { taskId } = useParams();
 	const [task] = useSelector(selectCurrentTask(taskId));
-	const { name, createdDate, status, priority, description, assignedProject } =
-		task;
+	const { name, createdDate, status, priority, description } = task;
+	const [project] = task.assignedProject;
 	const date = new Date(createdDate).toLocaleDateString();
 	const navigate = useNavigate();
 
@@ -55,12 +55,23 @@ const TaskDetailsPage = () => {
 					</p>
 				</div>
 				<TaskDetailButtonContainer>
-					<Link to="./edit">Edit</Link>
-					<button onClick={handleDelete} className="danger" children="Delete" />
+					<div>
+						<button
+							onClick={handleDelete}
+							className="success"
+							children="Complete"
+						/>
+					</div>
+					<div>
+						<Link to="./edit">Edit</Link>
+						<button onClick={handleDelete} children="Delete" />
+					</div>
 				</TaskDetailButtonContainer>
 			</section>
 			<h2>Assigned Project</h2>
-			<ProjectCard cardData={assignedProject} />
+			<Link to={`/dashboard/projects/${project._id}`}>
+				<ProjectCard cardData={project} />
+			</Link>
 		</MainContainer>
 	);
 };

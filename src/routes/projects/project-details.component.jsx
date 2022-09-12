@@ -5,11 +5,17 @@ import { apiCall } from "../../service/apiCall";
 import { selectCurrentProject } from "../../store/project/project.selector";
 import { MainContainer, TaskDetailButtonContainer } from "../tasks/task.styles";
 import UserTable from "../../components/user-table/user-table.component";
+import { useEffect, useState } from "react";
 
 const ProjectDetailsPage = () => {
 	const navigate = useNavigate();
 	const { projectId } = useParams();
-	const [project] = useSelector(selectCurrentProject(projectId));
+	const [project, setProject] = useState({});
+	const [selectedProject] = useSelector(selectCurrentProject(projectId));
+	useEffect(() => {
+		setProject(selectedProject);
+	}, [selectedProject]);
+
 	const {
 		name,
 		priority,
@@ -55,8 +61,21 @@ const ProjectDetailsPage = () => {
 					</p>
 				</div>
 				<TaskDetailButtonContainer>
-					<Link to="./edit">Edit</Link>
-					<button onClick={handleDelete} className="danger" children="Delete" />
+					<div>
+						<button
+							onClick={handleDelete}
+							className="success"
+							children="Complete"
+						/>
+					</div>
+					<div>
+						<Link to="./edit">Edit</Link>
+						<button
+							onClick={handleDelete}
+							className="danger"
+							children="Delete"
+						/>
+					</div>
 				</TaskDetailButtonContainer>
 			</section>
 
