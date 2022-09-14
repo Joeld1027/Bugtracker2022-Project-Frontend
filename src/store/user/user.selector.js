@@ -17,3 +17,8 @@ export const selectOneUser = (id) =>
 	createSelector([allUsersReducer], (allUsers) =>
 		allUsers.find((user) => user._id === id)
 	);
+
+export const selectAllUsersNotInProject = (id) =>
+	createSelector([allUsersReducer], (allUsers) =>
+		allUsers.filter((user) => !user.assignedProjects.includes(id))
+	);

@@ -4,6 +4,7 @@ import DataTable from "../table/data-table.component";
 import "./main-dashboard.styles.css";
 import { selectCurrentUser } from "../../store/user/user.selector";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const MainDashboard = () => {
 	const [user, setUser] = useState({});
@@ -19,7 +20,9 @@ const MainDashboard = () => {
 			{assignedProjects ? (
 				<div className="card-container">
 					{assignedProjects.map((project) => (
-						<ProjectCard key={project._id} cardData={project} />
+						<Link key={project._id} to={`/dashboard/projects/${project._id}`}>
+							<ProjectCard cardData={project} />
+						</Link>
 					))}
 				</div>
 			) : (

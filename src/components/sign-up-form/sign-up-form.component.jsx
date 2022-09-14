@@ -7,6 +7,7 @@ import { SignUpContainer } from "./sign-up-form.styles.jsx";
 import { setCurrentUser } from "../../store/user/user.action";
 import { ButtonsContainer } from "../sign-in-form/sign-in-form.styles";
 import { LoadingButtonContainer } from "../button/button.styles";
+import { SetState } from "../hooks/set-state.component";
 
 const defaultFormFields = {
 	firstName: "",

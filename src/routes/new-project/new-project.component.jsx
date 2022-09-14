@@ -12,7 +12,7 @@ import { fetchAllTasksAsync } from "../../store/task/task.actions";
 import { selectCurrentProject } from "../../store/project/project.selector";
 import { selectFreshTasks } from "../../store/task/task.selectors";
 import UserTable from "../../components/user-table/user-table.component";
-import { selectAllUsers } from "../../store/user/user.selector";
+import { selectAllUsersNotInProject } from "../../store/user/user.selector";
 
 const defaultFormFields = {
 	name: "",
@@ -30,7 +30,7 @@ const NewProject = ({ edit = null }) => {
 	const { name, description, priority } = formFields;
 	const navigate = useNavigate();
 	const [project] = useSelector(selectCurrentProject(projectId));
-	const allUsers = useSelector(selectAllUsers);
+	const filteredUsers = useSelector(selectAllUsersNotInProject(project._id));
 	const allTasks = useSelector(selectFreshTasks);
 
 	const deadline = new Date(formFields.deadline).toLocaleDateString();
@@ -179,9 +179,9 @@ const NewProject = ({ edit = null }) => {
 					)}
 					<UserTable
 						title="Add Developer"
-						users={allUsers}
 						handleCheckbox={handleCheckbox}
 						type="edit"
+						users={filteredUsers}
 					/>
 					<div className="public-btn-container">
 						<input className="public-btn" type="submit" value="Submit" />
