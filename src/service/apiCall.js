@@ -1,4 +1,7 @@
 import axios from "axios";
+import { fetchAllUsersAsync } from "../store/user/user.action";
+import { fetchAllTasksAsync } from "../store/task/task.actions";
+import { fetchAllProjectsAsync } from "../store/project/project.actions";
 
 export function setTokenHeader(token) {
 	if (token) {
@@ -18,4 +21,17 @@ export function apiCall(method, path, data) {
 				return reject(err);
 			});
 	});
+}
+
+export function setState(dispatch) {
+	const fetchAll = async () => {
+		return Promise.all([
+			dispatch(fetchAllUsersAsync()),
+			dispatch(fetchAllTasksAsync()),
+			dispatch(fetchAllProjectsAsync()),
+		]).then(() => {
+			console.log("state set");
+		});
+	};
+	fetchAll();
 }

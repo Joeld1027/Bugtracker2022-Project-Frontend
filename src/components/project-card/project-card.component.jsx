@@ -1,23 +1,39 @@
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { selectCurrentProject } from "../../store/project/project.selector";
 import ProgressBar from "../progressbar/progress-bar.component";
 import "./project-card.styles.css";
 
-const ProjectCard = ({ cardData = {} }) => {
-	const [project, setProject] = useState({});
-	const { name, deadline, projectTasks } = project;
+const INITIAL_STATE = {
+	name: "",
+	deadline: new Date(),
+	projectTasks: [],
+};
+
+const ProjectCard = ({ cardData }) => {
+	const [percent, setPercent] = useState(0);
+	const [project, setProject] = useState(INITIAL_STATE);
+	const [selectedProject] = useSelector(selectCurrentProject(cardData));
+	const { name, deadline } = project;
 	const date = new Date(deadline).toDateString();
 
-	useEffect(() => {
-		if (cardData) {
-			setProject(cardData);
-		}
-	}, [cardData]);
+	const handleProgressBar = () => {
+		const totalTasks = project.projectTasks.length;
+		const completedTasks = project.projectTasks.filter(
+			(task) => task.status === "Completed"
+		);
+		const percent = (completedTasks.length / totalTasks) * 100;
+		return Math.round(percent * 100) / 100;
+	};
 
-	const testData = [
-		{ bgcolor: "#6a1b9a", completed: 60 },
-		{ bgcolor: "#00695c", completed: 30 },
-		{ bgcolor: "#ef6c00", completed: 53 },
-	];
+	useEffect(() => {
+		if (project.projectTasks) {
+			setPercent(handleProgressBar());
+		}
+		if (selectedProject) {
+			setProject(selectedProject);
+		}
+	}, [project, selectedProject]);
 
 	return (
 		<div className="card-body">
@@ -28,9 +44,7 @@ const ProjectCard = ({ cardData = {} }) => {
 				</div>
 				<div>
 					<div className="middle">
-						<div className="left">
-							<ProgressBar bgcolor="#6a1b9a" completed="60" />
-						</div>
+						<ProgressBar bgcolor="#6a1b9a" completed={percent} />
 					</div>
 					<small className="text-muted"> Due on {date} </small>
 				</div>

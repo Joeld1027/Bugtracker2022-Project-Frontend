@@ -4,6 +4,7 @@ import ProjectCard from "../../components/project-card/project-card.component";
 import { apiCall } from "../../service/apiCall";
 import { selectCurrentTask } from "../../store/task/task.selectors";
 import { MainContainer, TaskDetailButtonContainer } from "./task.styles";
+import { handleStatus } from "../../utils/public-forms/form.utilities";
 
 const TaskDetailsPage = () => {
 	const { taskId } = useParams();
@@ -20,18 +21,15 @@ const TaskDetailsPage = () => {
 		navigate("/dashboard/tasks");
 	};
 
-	const handleStatus = (status) => {
-		switch (status) {
-			case "Pending":
-				return "warning";
-			case "New":
-				return "primary";
-			case "In Progress":
-				return "success";
-			default:
-				return "";
-		}
+	const handleComplete = () => {
+		apiCall("patch", `http://localhost:8081/tasks/${taskId}`, {
+			status: "Completed",
+		})
+			.then((res) => console.log(res))
+			.catch((error) => console.log(error));
+		navigate(-1);
 	};
+
 	return (
 		<MainContainer>
 			<section>
@@ -56,11 +54,13 @@ const TaskDetailsPage = () => {
 				</div>
 				<TaskDetailButtonContainer>
 					<div>
-						<button
-							onClick={handleDelete}
-							className="success"
-							children="Complete"
-						/>
+						{status !== "Completed" && (
+							<button
+								onClick={handleComplete}
+								className="success"
+								children="Complete"
+							/>
+						)}
 					</div>
 					<div>
 						<Link to="./edit">Edit</Link>

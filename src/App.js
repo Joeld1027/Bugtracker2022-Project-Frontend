@@ -34,7 +34,7 @@ function App() {
 				setTokenHeader(localStorage.jwToken);
 				apiCall("get", "http://localhost:8081/auth/currentUser")
 					.then((response) => {
-						const data = { user: response, token: localStorage.jwToken };
+						const data = { foundUser: response, token: localStorage.jwToken };
 						dispatch(setCurrentUser(data));
 						navigate("../dashboard", { replace: true });
 					})

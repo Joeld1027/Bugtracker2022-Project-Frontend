@@ -10,10 +10,11 @@ export const ProgressBarContainer = styled.div`
 
 export const BarFiller = styled.div`
 	height: 22px;
-	width: 60%;
+	width: ${(props) => props.filled}%;
 	background: #7380ec;
 	border-radius: 10px !important;
 	text-align: right;
+	transition: width 1s ease-in-out;
 `;
 
 export const Label = styled.span`

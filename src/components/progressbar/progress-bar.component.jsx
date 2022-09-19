@@ -4,7 +4,7 @@ const ProgressBar = (props) => {
 	const { bgcolor, completed } = props;
 	return (
 		<ProgressBarContainer>
-			<BarFiller>
+			<BarFiller filled={completed}>
 				<Label>{completed}%</Label>
 			</BarFiller>
 		</ProgressBarContainer>

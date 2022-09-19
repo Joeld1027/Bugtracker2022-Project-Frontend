@@ -67,7 +67,7 @@ export const TaskDetailButtonContainer = styled.div`
 	}
 	.success {
 		margin: 1rem 0;
-		background: #41f1b6;
+		background: var(--color-success);
 	}
 
 	button {

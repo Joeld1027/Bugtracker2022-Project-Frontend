@@ -48,6 +48,8 @@ main .card-body > div.card-header span {
 }
 
 main .card-body > div .middle {
+	width: 60%;
+	padding: 0.2rem;
 }
 
 main .card-body h3 {

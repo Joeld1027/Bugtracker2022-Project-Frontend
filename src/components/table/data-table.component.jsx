@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { handleStatus } from "../../utils/public-forms/form.utilities";
 import "./data-table.styles.css";
 
 const DataTable = ({ type = "Data", handleCheckbox, tableData, title }) => {
@@ -26,7 +27,9 @@ const DataTable = ({ type = "Data", handleCheckbox, tableData, title }) => {
 									<td>{data.priority}</td>
 									{type === "Projects" && <td>{date}</td>}
 									{type === "Tasks" && (
-										<td className="warning">{data.status}</td>
+										<td className={`${handleStatus(data.status)}`}>
+											{data.status}
+										</td>
 									)}
 									<td></td>
 									{type === "Tasks" && handleCheckbox && (

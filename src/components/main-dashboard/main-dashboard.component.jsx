@@ -21,7 +21,7 @@ const MainDashboard = () => {
 				<div className="card-container">
 					{assignedProjects.map((project) => (
 						<Link key={project._id} to={`/dashboard/projects/${project._id}`}>
-							<ProjectCard cardData={project} />
+							<ProjectCard cardData={project._id} />
 						</Link>
 					))}
 				</div>
