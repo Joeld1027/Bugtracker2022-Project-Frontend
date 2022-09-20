@@ -5,6 +5,7 @@ import "./main-dashboard.styles.css";
 import { selectCurrentUser } from "../../store/user/user.selector";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { selectCurrentUserTasks } from "../../store/task/task.selectors";
 
 const MainDashboard = () => {
 	const [user, setUser] = useState({});
@@ -13,6 +14,7 @@ const MainDashboard = () => {
 		setUser(currentUser);
 	}, [currentUser]);
 	const { assignedTasks, assignedProjects } = user;
+	const userTasks = useSelector(selectCurrentUserTasks(assignedTasks));
 
 	return (
 		<main>
@@ -31,7 +33,7 @@ const MainDashboard = () => {
 				</div>
 			)}
 
-			<DataTable title="Your Tasks" type="Tasks" tableData={assignedTasks} />
+			<DataTable title="Your Tasks" type="Tasks" tableData={userTasks} />
 		</main>
 	);
 };
