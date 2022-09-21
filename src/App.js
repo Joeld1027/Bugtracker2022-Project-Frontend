@@ -20,6 +20,7 @@ import ProjectDetailsPage from "./routes/projects/project-details.component.jsx"
 import ProfilePage from "./routes/profile/profile.component.jsx";
 import UserDetailsPage from "./routes/users/user.details.componet.jsx";
 import UserEditPage from "./routes/users/edit-user.component.jsx";
+import EditProject from "./routes/new-project/edit-project.component.jsx";
 
 function App() {
 	const navigate = useNavigate();
@@ -71,7 +72,7 @@ function App() {
 				<Route path="projects/:projectId" element={<ProjectDetailsPage />} />
 				<Route
 					path="projects/:projectId/edit"
-					element={<NewProject edit="edit" />}
+					element={<EditProject edit="edit" />}
 				/>
 				<Route path="projects/new" element={<NewProject />} />
 				<Route path="users" element={<Users />} />

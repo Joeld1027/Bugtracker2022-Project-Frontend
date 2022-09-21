@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import ProjectCard from "../../components/project-card/project-card.component";
-import { apiCall } from "../../service/apiCall";
 import { selectCurrentTask } from "../../store/task/task.selectors";
 import { selectCurrentUser } from "../../store/user/user.selector";
 import { MainContainer, TaskDetailButtonContainer } from "./task.styles";

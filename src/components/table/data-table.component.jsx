@@ -18,9 +18,9 @@ const DataTable = ({ type = "Data", handleCheckbox, tableData, title }) => {
 					</tr>
 				</thead>
 				<tbody>
-					{tableData && tableData.length > 0 ? (
+					{tableData && tableData[0] ? (
 						tableData.map((data) => {
-							let date = new Date(data.deadline).toLocaleDateString() || null;
+							let date = new Date(data.deadline).toLocaleDateString();
 							return (
 								<tr key={data._id}>
 									<td>{data.name}</td>

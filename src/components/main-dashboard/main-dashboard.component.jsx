@@ -33,7 +33,9 @@ const MainDashboard = () => {
 				</div>
 			)}
 
-			<DataTable title="Your Tasks" type="Tasks" tableData={userTasks} />
+			{userTasks ? (
+				<DataTable title="Your Tasks" type="Tasks" tableData={userTasks} />
+			) : null}
 		</main>
 	);
 };

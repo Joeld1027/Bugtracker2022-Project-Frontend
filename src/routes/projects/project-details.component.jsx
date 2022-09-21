@@ -1,13 +1,14 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import DataTable from "../../components/table/data-table.component";
-import { apiCall } from "../../service/apiCall";
 import { selectCurrentProject } from "../../store/project/project.selector";
+import { deleteProjectAsync } from "../../store/project/project.actions";
 import { MainContainer, TaskDetailButtonContainer } from "../tasks/task.styles";
 import UserTable from "../../components/user-table/user-table.component";
 import { useEffect, useState } from "react";
 
 const ProjectDetailsPage = () => {
+	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const { projectId } = useParams();
 	const [project, setProject] = useState({});
@@ -28,15 +29,7 @@ const ProjectDetailsPage = () => {
 	const date = new Date(created).toLocaleDateString();
 
 	const handleDelete = () => {
-		apiCall("delete", `http://localhost:8081/projects/${projectId}`)
-			.then((res) => console.log("deleted " + res.name))
-			.catch((err) => {
-				console.log(err);
-				if (err.response.status === 401) {
-					navigate("/auth");
-					return;
-				}
-			});
+		dispatch(deleteProjectAsync(projectId));
 		navigate("/dashboard/projects");
 	};
 
